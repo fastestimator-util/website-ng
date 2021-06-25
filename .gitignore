@@ -47,8 +47,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Tmp Files
-package-lock.json
-
 # pycache
 __pycache__
+
