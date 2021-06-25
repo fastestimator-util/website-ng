@@ -63,7 +63,7 @@ node(label: "master"){
         def customImage = docker.build(web_image, "--no-cache - < docker/Dockerfile")
         try {
             customImage.inside("-u root") {
-                sh "npm install"
+                sh "npm ci"
                 sh "npm run build:ssr"
                 sh "npm run serve:ssr &"
                 for (branch in branches){

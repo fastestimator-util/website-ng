@@ -36,7 +36,10 @@ git branch of that FE repo.
     ```
 * step 2: install npm dependency
     ```
-    npm install
+    npm install  # install from package.json
+    ```
+    ```
+    npm ci       # install from package-lock.json (more specific)
     ```
 
 ### Test
