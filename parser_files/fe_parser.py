@@ -63,7 +63,6 @@ class APIFolder:
 
         self.func_and_classes = []
         self.file_modules = []
-        # pdb.set_trace()
         for name, member in inspect.getmembers(dir_module):
             if name.startswith("_"):
                 continue
@@ -116,15 +115,18 @@ class APIMarkdown:
         self.fe_dir = fe_dir
 
     def get_url(self, obj):
-        sourcefile = inspect.getsourcefile(obj)
-        sourcelines = inspect.getsourcelines(obj)
-        start = sourcelines[1]
-        end = start + len(sourcelines[0]) - 1
+        try:
+            sourcefile = inspect.getsourcefile(obj)
+            sourcelines = inspect.getsourcelines(obj)
+            start = sourcelines[1]
+            end = start + len(sourcelines[0]) - 1
 
-        url = os.path.join(APIMarkdown.fe_url, branch,
-                           os.path.relpath(sourcefile, self.fe_dir),
-                           '#L' + str(start) + '-L' + str(end))
-        return url
+            url = os.path.join(APIMarkdown.fe_url, branch,
+                            os.path.relpath(sourcefile, self.fe_dir),
+                            '#L' + str(start) + '-L' + str(end))
+            return url
+        except OSError:
+            print(f'Class definition for {obj} could not be found!')
 
     def get_source_link(self, obj):
         return f'<a class="sourcelink" href={self.get_url(obj)}>View source on Github</a>\n'
