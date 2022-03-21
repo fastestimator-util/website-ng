@@ -69,7 +69,10 @@ class APIFolder:
             if not member: # ex: EarlyStop
                 continue
 
-            source_path = inspect.getfile(member)
+            try:
+                source_path = inspect.getfile(member)
+            except:
+                continue
             if not source_path.startswith(self.fe_dir): # skip module not from fe ex: cv2
                 continue
             if os.path.basename(
