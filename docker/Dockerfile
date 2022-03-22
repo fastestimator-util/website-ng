@@ -1,5 +1,5 @@
 # The environment for angular web appication and scraping
-FROM ubuntu:16.04
+FROM python:3.8
 
 # Replace shell with bash so we can source files
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
@@ -7,20 +7,13 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 # Configure python3.6
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
-    software-properties-common \
-    python-software-properties \
     curl \
     apt-utils \
     git \
     wget \
     unzip
 
-RUN add-apt-repository ppa:deadsnakes/ppa
-RUN apt-get update
-RUN apt-get install python3.6 -y --no-install-recommends
-RUN curl https://bootstrap.pypa.io/get-pip.py get-pip.py | python3.6
-
-RUN python3.6 -m pip install --no-cache-dir \
+RUN python -m pip install --no-cache-dir \
     bs4 \
     selenium \
     lxml
